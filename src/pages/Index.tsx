@@ -2,7 +2,9 @@
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import ImageModal from '@/components/ImageModal';
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
+import AutoPlay from 'embla-carousel-autoplay';
 
 const Index = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -41,10 +43,29 @@ const Index = () => {
     }
   ];
 
-  const handleImageClick = (index: number) => {
+  // Auto-play plugin configuration
+  const autoplay = AutoPlay({
+    delay: 3000,
+    stopOnInteraction: false,
+    stopOnMouseEnter: true,
+    rootNode: (emblaRoot) => emblaRoot.parentElement,
+  });
+
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { 
+      loop: true,
+      align: 'start',
+      slidesToScroll: 1,
+      containScroll: 'trimSnaps',
+      dragFree: true,
+    },
+    [autoplay]
+  );
+
+  const handleImageClick = useCallback((index: number) => {
     setSelectedImageIndex(index);
     setModalOpen(true);
-  };
+  }, []);
 
   return (
     <div className="min-h-screen bg-photo-dark">
@@ -64,32 +85,35 @@ const Index = () => {
             </p>
           </div>
 
-          {/* Auto-scrolling image strip with enhanced animations */}
+          {/* Draggable/swipeable image carousel with auto-scroll */}
           <div className="relative mb-12 mask-gradient">
-            <div className="flex space-x-6 animate-scroll-elegant group hover:animate-scroll-paused will-change-transform">
-              {/* First set of images */}
-              {featuredImages.concat(featuredImages).map((image, index) => (
-                <div
-                  key={index}
-                  className="group/item relative overflow-hidden rounded-xl flex-shrink-0 w-64 h-80 transform transition-all duration-500 hover:scale-105 hover:z-10 cursor-pointer"
-                  onClick={() => handleImageClick(index % featuredImages.length)}
-                >
-                  <img
-                    src={image.src}
-                    alt={image.title}
-                    className="w-full h-full object-cover transition-all duration-700 group-hover/item:scale-110 filter brightness-90 group-hover/item:brightness-100"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover/item:opacity-90 transition-opacity duration-500">
-                    <div className="absolute bottom-6 left-6 text-white transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500">
-                      <h3 className="text-xl font-playfair font-semibold mb-1 text-shadow-lg">{image.title}</h3>
-                      <div className="flex items-center space-x-2">
-                        <div className="w-6 h-0.5 bg-photo-gradient rounded-full"></div>
-                        <p className="text-sm text-white/90 uppercase tracking-wider">{image.category}</p>
+            <div className="overflow-hidden" ref={emblaRef}>
+              <div className="flex space-x-6">
+                {/* Duplicate images for seamless loop */}
+                {[...featuredImages, ...featuredImages, ...featuredImages].map((image, index) => (
+                  <div
+                    key={index}
+                    className="group/item relative overflow-hidden rounded-xl flex-shrink-0 w-64 h-80 transform transition-all duration-500 hover:scale-105 hover:z-10 cursor-pointer select-none"
+                    onClick={() => handleImageClick(index % featuredImages.length)}
+                  >
+                    <img
+                      src={image.src}
+                      alt={image.title}
+                      className="w-full h-full object-cover transition-all duration-700 group-hover/item:scale-110 filter brightness-90 group-hover/item:brightness-100 pointer-events-none"
+                      draggable={false}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover/item:opacity-90 transition-opacity duration-500">
+                      <div className="absolute bottom-6 left-6 text-white transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500">
+                        <h3 className="text-xl font-playfair font-semibold mb-1 text-shadow-lg">{image.title}</h3>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-6 h-0.5 bg-photo-gradient rounded-full"></div>
+                          <p className="text-sm text-white/90 uppercase tracking-wider">{image.category}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
 
