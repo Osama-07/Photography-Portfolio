@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -120,6 +119,14 @@ export default {
 					'50%': {
 						boxShadow: '0 0 20px rgba(99, 80, 71, 0.8), 0 0 30px rgba(181, 159, 141, 0.4)'
 					}
+				},
+				'scroll-left': {
+					'0%': {
+						transform: 'translateX(0)'
+					},
+					'100%': {
+						transform: 'translateX(-50%)'
+					}
 				}
 			},
 			animation: {
@@ -127,6 +134,7 @@ export default {
 				'fade-in-up': 'fade-in-up 0.8s ease-out',
 				'scale-in': 'scale-in 0.4s ease-out',
 				'glow': 'glow 2s ease-in-out infinite alternate',
+				'scroll-left': 'scroll-left 20s linear infinite',
 			}
 		}
 	},
