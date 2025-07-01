@@ -120,7 +120,7 @@ export default {
 						boxShadow: '0 0 20px rgba(99, 80, 71, 0.8), 0 0 30px rgba(181, 159, 141, 0.4)'
 					}
 				},
-				'scroll-left': {
+				'scroll-elegant': {
 					'0%': {
 						transform: 'translateX(0)'
 					},
@@ -134,9 +134,30 @@ export default {
 				'fade-in-up': 'fade-in-up 0.8s ease-out',
 				'scale-in': 'scale-in 0.4s ease-out',
 				'glow': 'glow 2s ease-in-out infinite alternate',
-				'scroll-left': 'scroll-left 20s linear infinite',
+				'scroll-elegant': 'scroll-elegant 30s linear infinite',
+				'scroll-paused': 'scroll-elegant 30s linear infinite paused',
+			},
+			textShadow: {
+				'lg': '2px 2px 4px rgba(0, 0, 0, 0.8)',
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+		require("tailwindcss-animate"),
+		function({ addUtilities }) {
+			const newUtilities = {
+				'.mask-gradient': {
+					'mask-image': 'linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)',
+					'-webkit-mask-image': 'linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)',
+				},
+				'.text-shadow-lg': {
+					'text-shadow': '2px 2px 4px rgba(0, 0, 0, 0.8)',
+				},
+				'.will-change-transform': {
+					'will-change': 'transform',
+				}
+			}
+			addUtilities(newUtilities)
+		}
+	],
 } satisfies Config;
