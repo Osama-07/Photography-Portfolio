@@ -1,8 +1,51 @@
 
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
+import ImageModal from '@/components/ImageModal';
+import { useState } from 'react';
 
 const Index = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
+  const featuredImages = [
+    {
+      src: "https://images.unsplash.com/photo-1527576539890-dfa815648363?w=600&h=800&fit=crop&q=80",
+      title: "Urban Geometry",
+      category: "Architecture",
+      description: "Exploring the intersection of light and shadow in modern architecture"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1458668383970-8ddd3927deed?w=600&h=800&fit=crop&q=80",
+      title: "Mountain Light",
+      category: "Landscape",
+      description: "Capturing the golden hour magic across mountain peaks"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1500673922987-e212871fec22?w=600&h=800&fit=crop&q=80",
+      title: "Forest Depths",
+      category: "Nature",  
+      description: "Deep into the heart of untouched wilderness"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=800&fit=crop&q=80",
+      title: "Golden Hour",
+      category: "Portrait",
+      description: "Natural light portraits in the perfect golden hour glow"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&h=800&fit=crop&q=80",
+      title: "Wild Serenity",
+      category: "Wildlife",
+      description: "Peaceful moments in nature's untamed beauty"
+    }
+  ];
+
+  const handleImageClick = (index: number) => {
+    setSelectedImageIndex(index);
+    setModalOpen(true);
+  };
+
   return (
     <div className="min-h-screen bg-photo-dark">
       <Navigation />
@@ -25,63 +68,11 @@ const Index = () => {
           <div className="relative mb-12 mask-gradient">
             <div className="flex space-x-6 animate-scroll-elegant group hover:animate-scroll-paused will-change-transform">
               {/* First set of images */}
-              {[
-                {
-                  src: "https://images.unsplash.com/photo-1527576539890-dfa815648363?w=600&h=800&fit=crop&q=80",
-                  title: "Urban Geometry",
-                  category: "Architecture"
-                },
-                {
-                  src: "https://images.unsplash.com/photo-1458668383970-8ddd3927deed?w=600&h=800&fit=crop&q=80",
-                  title: "Mountain Light",
-                  category: "Landscape"
-                },
-                {
-                  src: "https://images.unsplash.com/photo-1500673922987-e212871fec22?w=600&h=800&fit=crop&q=80",
-                  title: "Forest Depths",
-                  category: "Nature"
-                },
-                {
-                  src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=800&fit=crop&q=80",
-                  title: "Golden Hour",
-                  category: "Portrait"
-                },
-                {
-                  src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&h=800&fit=crop&q=80",
-                  title: "Wild Serenity",
-                  category: "Wildlife"
-                }
-              ].concat([
-                // Duplicate set for seamless loop
-                {
-                  src: "https://images.unsplash.com/photo-1527576539890-dfa815648363?w=600&h=800&fit=crop&q=80",
-                  title: "Urban Geometry",
-                  category: "Architecture"
-                },
-                {
-                  src: "https://images.unsplash.com/photo-1458668383970-8ddd3927deed?w=600&h=800&fit=crop&q=80",
-                  title: "Mountain Light",
-                  category: "Landscape"
-                },
-                {
-                  src: "https://images.unsplash.com/photo-1500673922987-e212871fec22?w=600&h=800&fit=crop&q=80",
-                  title: "Forest Depths",
-                  category: "Nature"
-                },
-                {
-                  src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=800&fit=crop&q=80",
-                  title: "Golden Hour",
-                  category: "Portrait"
-                },
-                {
-                  src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&h=800&fit=crop&q=80",
-                  title: "Wild Serenity",
-                  category: "Wildlife"
-                }
-              ]).map((image, index) => (
+              {featuredImages.concat(featuredImages).map((image, index) => (
                 <div
                   key={index}
-                  className="group/item relative overflow-hidden rounded-xl flex-shrink-0 w-64 h-80 transform transition-all duration-500 hover:scale-105 hover:z-10"
+                  className="group/item relative overflow-hidden rounded-xl flex-shrink-0 w-64 h-80 transform transition-all duration-500 hover:scale-105 hover:z-10 cursor-pointer"
+                  onClick={() => handleImageClick(index % featuredImages.length)}
                 >
                   <img
                     src={image.src}
@@ -112,6 +103,13 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      <ImageModal
+        images={featuredImages}
+        currentIndex={selectedImageIndex}
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+      />
     </div>
   );
 };
