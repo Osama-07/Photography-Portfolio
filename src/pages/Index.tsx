@@ -4,6 +4,7 @@ import ImageModal from "@/components/ImageModal";
 import { useState, useCallback, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import AutoPlay, { AutoplayType } from "embla-carousel-autoplay";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -191,12 +192,12 @@ const Index = () => {
           </div>
 
           <div className="text-center mt-12">
-            <a
-              href="/portfolio"
+            <Link
+              to="/portfolio"
               className="inline-block px-8 py-4 border-2 border-gradient-start hover:bg-photo-gradient text-photo-light hover:text-white transition-all duration-500 rounded-xl font-medium text-lg tracking-wide hover:shadow-2xl hover:shadow-gradient-start/20 transform hover:-translate-y-1"
             >
               عرض جميع الأعمال
-            </a>
+            </Link>
           </div>
         </div>
       </section>
