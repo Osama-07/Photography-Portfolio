@@ -1,6 +1,5 @@
-
-import { useState, useEffect } from 'react';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface ImageModalProps {
   images: Array<{ src: string; title: string; description?: string }>;
@@ -9,7 +8,12 @@ interface ImageModalProps {
   onClose: () => void;
 }
 
-const ImageModal = ({ images, currentIndex, isOpen, onClose }: ImageModalProps) => {
+const ImageModal = ({
+  images,
+  currentIndex,
+  isOpen,
+  onClose,
+}: ImageModalProps) => {
   const [index, setIndex] = useState(currentIndex);
 
   useEffect(() => {
@@ -19,34 +23,34 @@ const ImageModal = ({ images, currentIndex, isOpen, onClose }: ImageModalProps) 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!isOpen) return;
-      
+
       switch (e.key) {
-        case 'Escape':
+        case "Escape":
           onClose();
           break;
-        case 'ArrowLeft':
+        case "ArrowLeft":
           setIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
           break;
-        case 'ArrowRight':
+        case "ArrowRight":
           setIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0));
           break;
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, images.length, onClose]);
 
   // Prevent body scroll when modal is open
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
-    
+
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, [isOpen]);
 
@@ -55,7 +59,7 @@ const ImageModal = ({ images, currentIndex, isOpen, onClose }: ImageModalProps) 
   const currentImage = images[index];
 
   return (
-    <div 
+    <div
       className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in"
       onClick={onClose}
     >
@@ -92,7 +96,7 @@ const ImageModal = ({ images, currentIndex, isOpen, onClose }: ImageModalProps) 
       )}
 
       {/* Image Container */}
-      <div 
+      <div
         className="max-w-7xl max-h-full flex flex-col items-center animate-scale-in"
         onClick={(e) => e.stopPropagation()}
       >
@@ -100,13 +104,13 @@ const ImageModal = ({ images, currentIndex, isOpen, onClose }: ImageModalProps) 
           <img
             src={currentImage.src}
             alt={currentImage.title}
-            className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
+            className="max-w-full max-h-[75vh] object-contain rounded-lg shadow-2xl"
           />
         </div>
-        
+
         {/* Image Info */}
         <div className="mt-6 text-center px-4 animate-fade-in-up">
-          <h3 className="text-2xl font-playfair font-semibold text-white mb-3 text-shadow-lg">
+          <h3 className="text-2xl gradient-text font-semibold mb-3">
             {currentImage.title}
           </h3>
           {currentImage.description && (
@@ -115,13 +119,15 @@ const ImageModal = ({ images, currentIndex, isOpen, onClose }: ImageModalProps) 
             </p>
           )}
           {images.length > 1 && (
-            <div className="flex items-center justify-center space-x-3 mt-4">
+            <div className="flex items-center justify-center space-x-3 mt-4 max-md:hidden">
               <div className="flex space-x-1">
                 {images.map((_, i) => (
                   <div
                     key={i}
                     className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      i === index ? 'bg-photo-gradient scale-125' : 'bg-white/30'
+                      i === index
+                        ? "bg-photo-gradient scale-125"
+                        : "bg-white/30"
                     }`}
                   />
                 ))}

@@ -1,23 +1,28 @@
-
-import { useState } from 'react';
-import Navigation from '@/components/Navigation';
-import { Mail } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+import { useState } from "react";
+import Navigation from "@/components/Navigation";
+import { Mail } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { FaYoutube, FaWhatsapp, FaInstagram, FaTiktok } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -26,29 +31,30 @@ const Contact = () => {
     setIsSubmitting(true);
 
     // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     toast({
-      title: "Message sent successfully!",
-      description: "Thank you for reaching out. I'll get back to you within 24 hours.",
+      title: "تم إرسال الرسالة بنجاح!",
+      description: "شكرًا لتواصلك. سأرد عليك خلال 24 ساعة إن شاء الله.",
     });
 
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    setFormData({ name: "", email: "", subject: "", message: "" });
     setIsSubmitting(false);
   };
 
   return (
-    <div className="min-h-screen bg-photo-dark">
+    <div className="min-h-screen bg-photo-dark" dir="rtl">
       <Navigation />
-      
+
       {/* Header */}
       <section className="pt-24 pb-12 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-playfair font-bold gradient-text mb-6 animate-fade-in">
-            Let's Work Together
+          <h1 className="text-4xl md:text-6xl py-3 font-bold gradient-text mb-6 animate-fade-in">
+            دعنا نعمل معًا
           </h1>
           <p className="text-lg text-photo-light/80 max-w-2xl mx-auto animate-fade-in-up">
-            Whether you're looking for portrait sessions, commercial photography, or artistic collaborations, I'd love to hear about your vision.
+            سواء كنت تبحث عن جلسات بورتريه، تصوير تجاري، أو تعاون فني، يسعدني
+            سماع رؤيتك.
           </p>
         </div>
       </section>
@@ -57,34 +63,77 @@ const Contact = () => {
       <section className="px-4 pb-20">
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            
             {/* Contact Info */}
             <div className="animate-fade-in">
-              <h2 className="text-2xl font-playfair font-semibold gradient-text mb-8">
-                Get In Touch
+              <h2 className="text-2xl font-semibold gradient-text mb-8 py-4">
+                تواصل معي
               </h2>
-              
+
               <div className="space-y-8">
                 <div>
-                  <h3 className="text-lg font-semibold text-white mb-4">Photography Services</h3>
+                  <h3 className="text-lg font-semibold text-white mb-4">
+                    خدمات التصوير
+                  </h3>
                   <ul className="space-y-2 text-photo-light/80">
-                    <li>• Portrait & Headshot Sessions</li>
-                    <li>• Commercial & Architectural Photography</li>
-                    <li>• Fine Art Commissions</li>
-                    <li>• Editorial & Lifestyle Photography</li>
+                    <li>• جلسات بورتريه وصور شخصية</li>
+                    <li>• تصوير تجاري ومعماري</li>
+                    <li>• أعمال فنية خاصة</li>
+                    <li>• تصوير تحريري ونمط حياة</li>
                   </ul>
                 </div>
-                
+
                 <div>
-                  <h3 className="text-lg font-semibold text-white mb-4">Response Time</h3>
+                  <h3 className="text-lg font-semibold text-white mb-4">
+                    مدة الرد
+                  </h3>
                   <p className="text-photo-light/80">
-                    I typically respond to all inquiries within 24 hours. For urgent requests, please mention it in your message.
+                    عادةً ما أجيب على جميع الاستفسارات خلال 24 ساعة. للطلبات
+                    العاجلة، يرجى ذكر ذلك في رسالتك.
                   </p>
                 </div>
 
                 <div className="flex items-center space-x-3 text-photo-light/80">
-                  <Mail size={20} className="text-gradient-end" />
-                  <span>alex@alexchenphoto.com</span>
+                  <Mail size={20} className="text-gradient-end ml-2" />
+                  <span>abdullah@abdullahphoto.com</span>
+                </div>
+
+                {/* Social Media */}
+                <div className="flex justify-center gap-4 text-[#c8b192] text-2xl">
+                  <a
+                    className="text-4xl transition-all hover:scale-110"
+                    href="https://www.youtube.com/@abodspro1"
+                    target="_blank"
+                  >
+                    <FaYoutube />
+                  </a>
+                  <a
+                    className="text-4xl transition-all hover:scale-110"
+                    href="https://wa.me/966531177595"
+                    target="_blank"
+                  >
+                    <FaWhatsapp />
+                  </a>
+                  <a
+                    className="text-4xl transition-all hover:scale-110"
+                    href="https://www.instagram.com/abodspro"
+                    target="_blank"
+                  >
+                    <FaInstagram />
+                  </a>
+                  <a
+                    className="text-4xl transition-all hover:scale-110"
+                    href="https://x.com/abodspro"
+                    target="_blank"
+                  >
+                    <FaXTwitter />
+                  </a>
+                  <a
+                    className="text-4xl transition-all hover:scale-110"
+                    href="https://www.tiktok.com/@abodspro"
+                    target="_blank"
+                  >
+                    <FaTiktok />
+                  </a>
                 </div>
               </div>
             </div>
@@ -93,8 +142,11 @@ const Contact = () => {
             <div className="animate-fade-in-up">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="block text-white font-medium mb-2">
-                    Name *
+                  <label
+                    htmlFor="name"
+                    className="block text-white font-medium mb-2"
+                  >
+                    الاسم *
                   </label>
                   <input
                     type="text"
@@ -104,13 +156,16 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 bg-black/40 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-gradient-end focus:outline-none focus:ring-2 focus:ring-gradient-end/20 transition-all duration-200"
-                    placeholder="Your full name"
+                    placeholder="الاسم الكامل"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-white font-medium mb-2">
-                    Email *
+                  <label
+                    htmlFor="email"
+                    className="block text-white font-medium mb-2"
+                  >
+                    البريد الإلكتروني *
                   </label>
                   <input
                     type="email"
@@ -120,13 +175,16 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 bg-black/40 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-gradient-end focus:outline-none focus:ring-2 focus:ring-gradient-end/20 transition-all duration-200"
-                    placeholder="your.email@example.com"
+                    placeholder="بريدك الإلكتروني"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="subject" className="block text-white font-medium mb-2">
-                    Project Type
+                  <label
+                    htmlFor="subject"
+                    className="block text-white font-medium mb-2"
+                  >
+                    نوع المشروع
                   </label>
                   <select
                     id="subject"
@@ -135,18 +193,21 @@ const Contact = () => {
                     onChange={handleChange}
                     className="w-full px-4 py-3 bg-black/40 border border-gray-600 rounded-lg text-white focus:border-gradient-end focus:outline-none focus:ring-2 focus:ring-gradient-end/20 transition-all duration-200"
                   >
-                    <option value="">Select a project type</option>
-                    <option value="portrait">Portrait Session</option>
-                    <option value="commercial">Commercial Photography</option>
-                    <option value="wedding">Wedding Photography</option>
-                    <option value="fine-art">Fine Art Commission</option>
-                    <option value="other">Other</option>
+                    <option value="">اختر نوع المشروع</option>
+                    <option value="portrait">جلسة بورتريه</option>
+                    <option value="commercial">تصوير تجاري</option>
+                    <option value="wedding">تصوير زفاف</option>
+                    <option value="fine-art">عمل فني خاص</option>
+                    <option value="other">أخرى</option>
                   </select>
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-white font-medium mb-2">
-                    Message *
+                  <label
+                    htmlFor="message"
+                    className="block text-white font-medium mb-2"
+                  >
+                    الرسالة *
                   </label>
                   <textarea
                     id="message"
@@ -156,16 +217,16 @@ const Contact = () => {
                     required
                     rows={6}
                     className="w-full px-4 py-3 bg-black/40 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-gradient-end focus:outline-none focus:ring-2 focus:ring-gradient-end/20 transition-all duration-200 resize-vertical"
-                    placeholder="Tell me about your project, vision, timeline, and any specific requirements..."
+                    placeholder="حدثني عن مشروعك، رؤيتك، الجدول الزمني، وأي متطلبات خاصة..."
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full px-6 py-4 bg-photo-gradient hover:bg-photo-gradient-hover text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-[1.02] disabled:opacity-70 disabled:transform-none animate-glow"
+                  className="w-full px-6 py-4 bg-photo-gradient hover:bg-photo-gradient-hover text-white font-semibold rounded-lg transition-all duration-3000 transform hover:scale-[1.02] disabled:opacity-70 disabled:transform-none animate-glow"
                 >
-                  {isSubmitting ? 'Sending Message...' : 'Send Message'}
+                  {isSubmitting ? "جاري إرسال الرسالة..." : "إرسال الرسالة"}
                 </button>
               </form>
             </div>

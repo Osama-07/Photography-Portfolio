@@ -73,7 +73,7 @@ export default {
 				'inter': ['Inter', 'sans-serif'],
 			},
 			backgroundImage: {
-				'photo-gradient': 'linear-gradient(135deg, #635047 0%, #b59f8d 100%)',
+				'photo-gradient': 'linear-gradient(270deg, #635047 0%, #b59f8d 100%)',
 				'photo-gradient-hover': 'linear-gradient(135deg, #7a5d52 0%, #c9b09e 100%)',
 			},
 			borderRadius: {
