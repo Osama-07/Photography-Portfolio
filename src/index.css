@@ -136,21 +136,6 @@
   src: url("/src/assets/fonts/Cairo-Black.ttf");
 }
 
-@font-face {
-  font-family: "Marhey";
-  src: url("/src/assets/fonts/Marhey-Regular.ttf");
-}
-
-@font-face {
-  font-family: "Marhey";
-  src: url("/src/assets/fonts/Marhey-Bold.ttf");
-}
-
-@font-face {
-  font-family: "Marhey";
-  src: url("/src/assets/fonts/Marhey-Medium.ttf");
-}
-
 html {
   direction: rtl;
 }
