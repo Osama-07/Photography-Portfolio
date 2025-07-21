@@ -94,7 +94,10 @@ const Index = () => {
       <Hero />
 
       {/* Featured Work Preview */}
-      <section id="content" className="py-20 px-4 overflow-hidden">
+      <section
+        id="content"
+        className="py-20 px-4 overflow-hidden relative bg-photo-dark"
+      >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 animate-fade-in-up">
             <h2 className="text-4xl md:text-5xl py-3 font-bold gradient-text mb-6">
