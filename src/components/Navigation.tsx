@@ -22,7 +22,7 @@ const Navigation = () => {
 
   const navItems = [
     { name: "الرئيسية", path: "/" },
-    { name: "المعرض", path: "/portfolio" },
+    { name: "المعرض", path: "/gallery" },
     { name: "عن عبدالله", path: "/about" },
     { name: "تواصل", path: "/contact" },
   ];

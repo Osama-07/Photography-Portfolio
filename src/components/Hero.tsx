@@ -12,11 +12,11 @@ const Hero = () => {
       {/* Background Image */}
       <div className="inset-0 z-0 fixed">
         <img
-          src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1920&h=1080&fit=crop&q=80"
-          alt="منظر جبلي ضبابي"
+          src="https://lh3.googleusercontent.com/d/1HpBkOezApeqcSJlXl9ib9Xe-e4L_IJa-"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/60"></div>
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/50 backdrop-blur"></div>
       </div>
 
       {/* Content */}

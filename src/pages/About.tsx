@@ -1,11 +1,9 @@
 import Navigation from "@/components/Navigation";
-import personalImg from "../../public/Personal-Image.png";
+import personalImg from "/Personal-Image.png";
 
 const About = () => {
   return (
     <div className="min-h-screen bg-photo-dark" dir="rtl">
-      <Navigation />
-
       {/* Hero Section */}
       <section className="pt-24 pb-12 px-4">
         <div className="max-w-6xl mx-auto">

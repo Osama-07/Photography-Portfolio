@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface ImageModalProps {
-  images: Array<{ src: string; title: string; description?: string }>;
+  images: Array<{ src: string; title: string }>;
   currentIndex: number;
   isOpen: boolean;
   onClose: () => void;
@@ -113,11 +113,6 @@ const ImageModal = ({
           <h3 className="text-2xl gradient-text font-semibold mb-3">
             {currentImage.title}
           </h3>
-          {currentImage.description && (
-            <p className="text-photo-light/80 max-w-lg mx-auto mb-3 leading-relaxed">
-              {currentImage.description}
-            </p>
-          )}
           {images.length > 1 && (
             <div className="flex items-center justify-center space-x-3 mt-4 max-md:hidden">
               <div className="flex space-x-1">
