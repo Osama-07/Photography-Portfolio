@@ -29,7 +29,7 @@ const Hero = () => {
         </p>
 
         <Link
-          to="/portfolio"
+          to="/gallery"
           className="inline-block px-8 py-4 bg-photo-gradient hover:bg-photo-gradient-hover text-white font-medium rounded-lg transition-all duration-1000 transform hover:scale-105 hover:shadow-lg animate-glow"
         >
           دخول المعرض
