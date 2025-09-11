@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Navigation from "@/components/Navigation";
 import { Mail } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
 import { FaYoutube, FaWhatsapp, FaInstagram, FaTiktok } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import { useSuccessPopup } from "@/hooks/use-success-popup";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -13,7 +13,7 @@ const Contact = () => {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
+  const { showPopup, PopupComponent } = useSuccessPopup();
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -31,11 +31,12 @@ const Contact = () => {
     setIsSubmitting(true);
 
     // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
-    toast({
-      title: "تم إرسال الرسالة بنجاح!",
-      description: "شكرًا لتواصلك. سأرد عليك خلال 24 ساعة إن شاء الله.",
+    showPopup({
+      title: "تم الارسال بنجاح",
+      description: "شكرا لك",
+      duration: 3000,
     });
 
     setFormData({ name: "", email: "", subject: "", message: "" });
@@ -232,6 +233,7 @@ const Contact = () => {
             </div>
           </div>
         </div>
+        <PopupComponent />
       </section>
     </div>
   );
