@@ -4,6 +4,7 @@ import { Mail } from "lucide-react";
 import { FaYoutube, FaWhatsapp, FaInstagram, FaTiktok } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { useSuccessPopup } from "@/hooks/use-success-popup";
+import emailjs from "emailjs-com";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +15,14 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { showPopup, PopupComponent } = useSuccessPopup();
+  const projectTypes = [
+    { value: "", label: "اختر نوع المشروع" },
+    { value: "portrait", label: "جلسة بورتريه" },
+    { value: "commercial", label: "تصوير تجاري" },
+    { value: "wedding", label: "تصوير زفاف" },
+    { value: "fine-art", label: "عمل فني خاص" },
+    { value: "other", label: "أخرى" },
+  ];
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -30,23 +39,58 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 500));
-
-    showPopup({
-      title: "تم الارسال بنجاح",
-      description: "شكرا لك",
-      duration: 3000,
+    const now = new Date();
+    const dateStr = now.toLocaleDateString("en-US", {
+      weekday: "long",
+      day: "numeric",
+      month: "numeric",
+      year: "numeric",
+      timeZone: "Asia/Riyadh",
+    });
+    const timeStr = now.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true,
+      timeZone: "Asia/Riyadh",
     });
 
-    setFormData({ name: "", email: "", subject: "", message: "" });
-    setIsSubmitting(false);
+    try {
+      await emailjs
+        .send(
+          import.meta.env.VITE_EMAILJS_SERVICE_ID!,
+          import.meta.env.VITE_EMAILJS_TEMPLATE_ID!,
+          {
+            name: formData.name,
+            email: formData.email,
+            // get the label from the projectTypes array
+            subject: projectTypes.find(
+              (type) => type.value === formData.subject
+            )?.label,
+            message: formData.message,
+            time: `\nالتاريخ: ${dateStr}\nالوقت: ${timeStr}`,
+          },
+          import.meta.env.VITE_EMAILJS_PUBLIC_KEY!
+        )
+        .then((res) => {
+          if (res.status === 200) {
+            showPopup({
+              title: "تم الارسال بنجاح",
+              description: "شكرا لك",
+              duration: 3000,
+            });
+          }
+        });
+    } catch (error) {
+      console.error("Error sending email:", error);
+    } finally {
+      setFormData({ name: "", email: "", subject: "", message: "" });
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <div className="min-h-screen bg-photo-dark" dir="rtl">
-      <Navigation />
-
       {/* Header */}
       <section className="pt-24 pb-12 px-4">
         <div className="max-w-4xl mx-auto text-center">
@@ -95,7 +139,7 @@ const Contact = () => {
 
                 <div className="flex items-center space-x-3 text-photo-light/80">
                   <Mail size={20} className="text-gradient-end ml-2" />
-                  <span>abdullah@abdullahphoto.com</span>
+                  <span>abodspro@gmail.com</span>
                 </div>
 
                 {/* Social Media */}
@@ -192,14 +236,13 @@ const Contact = () => {
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-black/40 border border-gray-600 rounded-lg text-white focus:border-gradient-end focus:outline-none focus:ring-2 focus:ring-gradient-end/20 transition-all duration-200"
+                    className="w-full px-4 py-3 bg-black/90 border border-gray-600 rounded-lg text-white focus:border-gradient-end focus:outline-none focus:ring-2 focus:ring-gradient-end/20 transition-all duration-200"
                   >
-                    <option value="">اختر نوع المشروع</option>
-                    <option value="portrait">جلسة بورتريه</option>
-                    <option value="commercial">تصوير تجاري</option>
-                    <option value="wedding">تصوير زفاف</option>
-                    <option value="fine-art">عمل فني خاص</option>
-                    <option value="other">أخرى</option>
+                    {projectTypes.map((type) => (
+                      <option key={type.value} value={type.value}>
+                        {type.label}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
