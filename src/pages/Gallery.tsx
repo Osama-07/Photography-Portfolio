@@ -21,7 +21,7 @@ const Gallery = () => {
   };
 
   return (
-    <div className="min-h-screen bg-photo-dark" dir="rtl">
+    <section id="gallery" className="relative">
       {/* Header */}
       <section className="pt-24 pb-12 px-4">
         <div className="max-w-6xl mx-auto text-center">
@@ -115,7 +115,7 @@ const Gallery = () => {
         // For the case where images match the selected category
         <section className="px-4 pb-20">
           <div className="max-w-7xl mx-auto">
-            <div className="columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6">
+            <div className="columns-2 md:columns-3 lg:columns-6 gap-6 space-y-6">
               {filteredImages.map((image, index) => (
                 <div
                   key={`${selectedCategory}-${index}`}
@@ -151,7 +151,7 @@ const Gallery = () => {
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
       />
-    </div>
+    </section>
   );
 };
 

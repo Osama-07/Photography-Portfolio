@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
-const Navigation = () => {
+const Navigation = ({ hash }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,22 +15,18 @@ const Navigation = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    setIsOpen(false);
-  }, [location]);
-
   const navItems = [
-    { name: "الرئيسية", path: "/" },
-    { name: "المعرض", path: "/gallery" },
-    { name: "عن عبدالله", path: "/about" },
-    { name: "تواصل", path: "/contact" },
+    { name: "الرئيسية", path: "#home" },
+    { name: "المعرض", path: "#gallery" },
+    { name: "عن عبدالله", path: "#about" },
+    { name: "تواصل", path: "#contact" },
   ];
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 bg-photo-dark/50 backdrop-blur-md shadow-lg z-50 w-full mx-auto transition-all duration-500 ${
         isScrolled
-          ? "bg-photo-dark/95 backdrop-blur-md shadow-lg"
+          ? "md:w-full lg:w-3/4 2xl:w-1/2 md:rounded-full md:mt-5 md:px-6"
           : "bg-transparent"
       }`}
     >
@@ -48,18 +43,18 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex gap-x-8">
             {navItems.map((item) => (
-              <Link
+              <a
                 key={item.name}
-                to={item.path}
-                className={`relative text-photo-light hover:text-white transition-colors duration-200 ${
-                  location.pathname === item.path ? "text-white" : ""
+                href={item.path}
+                className={`relative text-photo-light hover:text-gradient-end transition-colors duration-200 ${
+                  hash === item.path ? "text-white" : ""
                 }`}
               >
                 {item.name}
-                {location.pathname === item.path && (
-                  <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-photo-gradient rounded-full"></div>
+                {hash === item.path && (
+                  <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-photo-gradient rounded-full transition-all"></div>
                 )}
-              </Link>
+              </a>
             ))}
           </div>
 

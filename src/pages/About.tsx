@@ -1,24 +1,21 @@
-import Navigation from "@/components/Navigation";
-import personalImg from "/Personal-Image.png";
-
 const About = () => {
   return (
-    <div className="min-h-screen bg-photo-dark" dir="rtl">
+    <section id="about" className="relative">
       {/* Hero Section */}
-      <section className="pt-24 pb-12 px-4">
+      <div className="pt-24 pb-12 px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
             {/* Portrait */}
-            <div className="animate-fade-in">
+            {/* <div className="animate-fade-in">
               <img
                 src={personalImg}
                 alt="عبدالله - مصور فوتوغرافي"
                 className="w-full max-w-md mx-auto lg:mx-0 rounded-lg photo-hover"
               />
-            </div>
+            </div> */}
 
             {/* Content */}
-            <div className="animate-fade-in-up">
+            <div className="animate-fade-in-up p-10 rounded-xl bg-photo-dark bg-opacity-70 backdrop-blur">
               <h1 className="text-4xl py-3 md:text-6xl font-bold gradient-text mb-6">
                 عن عبدالله
               </h1>
@@ -47,10 +44,10 @@ const About = () => {
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Experience Timeline */}
-      <section className="py-20 px-4">
+      <div className="py-20 px-4">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl py-3 font-bold gradient-text text-center mb-16">
             المسيرة والخبرة
@@ -109,10 +106,10 @@ const About = () => {
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Philosophy */}
-      <section className="py-20 px-4 bg-black/20">
+      <div className="py-20 px-4 bg-black/20">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl py-3 font-bold gradient-text mb-12">
             فلسفتي في التصوير
@@ -129,8 +126,8 @@ const About = () => {
             وخيال المشاهد.
           </p>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 

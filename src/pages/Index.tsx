@@ -5,10 +5,14 @@ import { Link } from "react-router-dom";
 import { useHome } from "@/Context/HomeContext";
 // Swiper imports
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, FreeMode } from "swiper/modules";
+import { Autoplay, FreeMode, EffectCards, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/free-mode";
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/pagination";
 
 const Index = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -21,14 +25,11 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-photo-dark">
+    <section id="home" className="min-h-screen">
       <Hero />
 
       {/* Featured Work Preview */}
-      <section
-        id="content"
-        className="py-20 px-4 overflow-hidden relative bg-photo-dark"
-      >
+      <div className="py-20 px-4 overflow-hidden relative" data-aos="fade-up">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 animate-fade-in-up">
             <h2 className="text-4xl md:text-5xl py-3 font-bold gradient-text mb-6">
@@ -43,19 +44,61 @@ const Index = () => {
 
           {/* Swiper image carousel */}
           {!loading && (
-            <div className="relative mb-12 mask-gradient">
+            <div className="relative p-10 mb-12 mask-gradient flex justify-center items-center max-md:flex-col gap-10">
               <Swiper
-                spaceBetween={16}
-                slidesPerView="auto"
+                effect={"cards"}
+                slidesPerView={1}
+                spaceBetween={30}
                 loop={true}
-                freeMode={true}
-                speed={20000}
                 autoplay={{
-                  delay: 0,
+                  delay: 2500,
                   disableOnInteraction: false,
                   pauseOnMouseEnter: true,
                 }}
-                modules={[Autoplay, FreeMode]}
+                cardsEffect={{
+                  rotate: true,
+                  slideShadows: false,
+                }}
+                modules={[Autoplay, FreeMode, EffectCards, Pagination]}
+                className="w-full"
+              >
+                {images.map((image, index) => (
+                  <SwiperSlide key={index} style={{ width: "16rem" }}>
+                    <div
+                      className="group/item relative overflow-hidden rounded-xl flex-shrink-0 w-64 h-80 mx-auto transform transition-all duration-500 hover:scale-105 hover:z-10 cursor-pointer select-none"
+                      onClick={() => handleImageClick(index)}
+                    >
+                      <img
+                        src={image.src}
+                        alt={image.title}
+                        className="h-full w-full"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover/item:opacity-90 transition-opacity duration-500">
+                        <div className="absolute bottom-6 left-6 text-white transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500">
+                          <h3 className="text-xl font-semibold mb-1 text-shadow-lg">
+                            {image.title}
+                          </h3>
+                        </div>
+                      </div>
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+              <Swiper
+                effect={"cards"}
+                slidesPerView={1}
+                spaceBetween={30}
+                loop={true}
+                autoplay={{
+                  delay: 2500,
+                  disableOnInteraction: false,
+                  pauseOnMouseEnter: true,
+                }}
+                cardsEffect={{
+                  rotate: true,
+                  slideShadows: false,
+                }}
+                modules={[Autoplay, FreeMode, EffectCards, Pagination]}
                 className="w-full"
               >
                 {images.map((image, index) => (
@@ -92,7 +135,7 @@ const Index = () => {
             </Link>
           </div>
         </div>
-      </section>
+      </div>
 
       <ImageModal
         images={images}
@@ -100,7 +143,7 @@ const Index = () => {
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
       />
-    </div>
+    </section>
   );
 };
 

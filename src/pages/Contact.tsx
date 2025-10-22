@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Navigation from "@/components/Navigation";
 import { Mail } from "lucide-react";
 import { FaYoutube, FaWhatsapp, FaInstagram, FaTiktok } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
@@ -90,7 +89,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-photo-dark" dir="rtl">
+    <section id="contact" className="relative">
       {/* Header */}
       <section className="pt-24 pb-12 px-4">
         <div className="max-w-4xl mx-auto text-center">
@@ -143,7 +142,7 @@ const Contact = () => {
                 </div>
 
                 {/* Social Media */}
-                <div className="flex justify-center gap-4 text-[#c8b192] text-2xl">
+                <div className="flex justify-center gap-4 text-[#c8b192] text-2xl w-fit p-5 rounded-full bg-black/30 backdrop-blur">
                   <a
                     className="text-4xl transition-all hover:scale-110"
                     href="https://www.youtube.com/@abodspro1"
@@ -278,7 +277,7 @@ const Contact = () => {
         </div>
         <PopupComponent />
       </section>
-    </div>
+    </section>
   );
 };
 
