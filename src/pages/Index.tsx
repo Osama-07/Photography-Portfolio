@@ -29,7 +29,7 @@ const Index = () => {
       <Hero />
 
       {/* Featured Work Preview */}
-      <div className="py-20 px-4 overflow-hidden relative" data-aos="fade-up">
+      <div id="content" className="py-20 px-4 overflow-hidden relative">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 animate-fade-in-up">
             <h2 className="text-4xl md:text-5xl py-3 font-bold gradient-text mb-6">
@@ -44,7 +44,10 @@ const Index = () => {
 
           {/* Swiper image carousel */}
           {!loading && (
-            <div className="relative p-10 mb-12 mask-gradient flex justify-center items-center max-md:flex-col gap-10">
+            <div
+              className="relative p-10 mb-12 mask-gradient flex justify-center items-center max-md:flex-col gap-10"
+              data-aos="fade-up"
+            >
               <Swiper
                 effect={"cards"}
                 slidesPerView={1}
@@ -72,6 +75,7 @@ const Index = () => {
                         src={image.src}
                         alt={image.title}
                         className="h-full w-full"
+                        loading="lazy"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover/item:opacity-90 transition-opacity duration-500">
                         <div className="absolute bottom-6 left-6 text-white transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500">
@@ -111,6 +115,7 @@ const Index = () => {
                         src={image.src}
                         alt={image.title}
                         className="h-full w-full"
+                        loading="lazy"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover/item:opacity-90 transition-opacity duration-500">
                         <div className="absolute bottom-6 left-6 text-white transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500">
@@ -126,14 +131,14 @@ const Index = () => {
             </div>
           )}
 
-          <div className="text-center mt-12">
-            <Link
-              to="/gallery"
+          {/* <div className="text-center mt-12">
+            <a
+              href="#gallery"
               className="inline-block px-8 py-4 border-2 border-gradient-start hover:bg-photo-gradient text-photo-light hover:text-white transition-all duration-500 rounded-xl font-medium text-lg tracking-wide hover:shadow-2xl hover:shadow-gradient-start/20 transform hover:-translate-y-1"
             >
               عرض جميع الأعمال
-            </Link>
-          </div>
+            </a>
+          </div> */}
         </div>
       </div>
 
